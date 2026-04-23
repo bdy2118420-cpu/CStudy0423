@@ -26,7 +26,7 @@ public:
 	AMyPlayerController();
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
-	TArray<TSoftObjectPtr<UInputMappingContext>> InputMappingContext;
+	TArray<TSoftObjectPtr<UInputMappingContext>> InputMappingContexts;
 
 	
 };

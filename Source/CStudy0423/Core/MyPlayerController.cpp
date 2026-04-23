@@ -19,7 +19,7 @@ void AMyPlayerController::OnPossess(APawn* aPawn)
 		if(Subsystem)
 		{
 			Subsystem->ClearAllMappings();
-			for(const auto& IMC : InputMappingContext)
+			for(const auto& IMC : InputMappingContexts)
 			{
 				Subsystem->AddMappingContext(IMC.LoadSynchronous(), 0);
 			}
