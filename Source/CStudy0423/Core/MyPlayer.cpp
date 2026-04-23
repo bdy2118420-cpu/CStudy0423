@@ -18,9 +18,12 @@ AMyPlayer::AMyPlayer()
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
 	SpringArm->SetupAttachment(GetRootComponent());
-
+	SpringArm->TargetArmLength = 300.f;
+	
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(SpringArm);
+
+
 
 	GetMesh()->SetRelativeLocationAndRotation(FVector(0, 0, -GetCapsuleComponent()->GetScaledCapsuleHalfHeight()),FRotator(0, -90.f, 0));
 
@@ -55,7 +58,6 @@ void AMyPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		Input->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ACharacter::Jump);
 		Input->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 		Input->BindAction(JumpAction, ETriggerEvent::Canceled, this, &ACharacter::StopJumping);
-
 	}
 }
 
@@ -79,7 +81,7 @@ void AMyPlayer::Move(const FInputActionValue& Value)
 void AMyPlayer::Look(const FInputActionValue& Value)
 {
 	FVector2D LookValue = Value.Get<FVector2D>();
-	AddControllerPitchInput(LookValue.Y);
+	AddControllerPitchInput(-(LookValue.Y));
 	AddControllerYawInput(LookValue.X);
 }
 
